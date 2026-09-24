@@ -311,311 +311,567 @@
 
 
 
-import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  ScrollView,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
+// import React from 'react';
+// import {
+//   View,
+//   Text,
+//   Image,
+//   Pressable,
+//   ScrollView,
+//   FlatList,
+//   StyleSheet,
+// } from 'react-native';
 
-export default function MyApp() {
+// export default function MyApp() {
 
-  // Danh sách bài viết
-  const articles = [
-    {
-      id: '1',
-      title: 'Cách chăm sóc chó khỏe mạnh',
-      image: 'https://images.unsplash.com/photo-1552053831-71594a27632d',
-    },
-    {
-      id: '2',
-      title: 'Thức ăn tốt cho thú cưng',
-      image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
-    },
-    {
-      id: '3',
-      title: 'Lịch tiêm phòng cho thú cưng',
-      image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b',
-    },
-  ];
+//   // Danh sách bài viết
+//   const articles = [
+//     {
+//       id: '1',
+//       title: 'Cách chăm sóc chó khỏe mạnh',
+//       image: 'https://images.unsplash.com/photo-1552053831-71594a27632d',
+//     },
+//     {
+//       id: '2',
+//       title: 'Thức ăn tốt cho thú cưng',
+//       image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
+//     },
+//     {
+//       id: '3',
+//       title: 'Lịch tiêm phòng cho thú cưng',
+//       image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b',
+//     },
+//   ];
+
+//   return (
+//     <ScrollView style={styles.container}>
+
+//       {/* HEADER */}
+//       <View style={styles.header}>
+//         <View>
+//           <Text style={styles.appName}>🐾 PET CARE</Text>
+//           <Text style={styles.headerText}>
+//             Chăm sóc thú cưng của bạn
+//           </Text>
+//         </View>
+
+        
+//       </View>
+
+
+//       {/* KHU VỰC THÔNG TIN CHÍNH */}
+//       <View style={styles.mainCard}>
+
+//         <Text style={styles.sectionTitle}>
+//           Thú cưng của tôi
+//         </Text>
+
+//        <Image
+//             source={require('../../assets/images/cat.jpg')}
+//             style={styles.petImage}
+        
+//         />
+//         <Text style={styles.petName}>
+//            Mun😺
+//         </Text>
+
+//         <Text style={styles.petInfo}>
+//           Laxanh • 2 tuổi
+//         </Text>
+
+//         {/* NÚT THAO TÁC */}
+//         <Pressable
+//           style={styles.button}
+//           onPress={() => alert('Xem hồ sơ Mun')}
+//         >
+//           <Text style={styles.buttonText}>
+//             XEM HỒ SƠ
+//           </Text>
+//         </Pressable>
+
+//       </View>
+
+
+//       {/* DANH SÁCH DỊCH VỤ */}
+//       <Text style={styles.sectionTitle}>
+//         Dịch vụ chăm sóc
+//       </Text>
+
+//       <View style={styles.serviceContainer}>
+
+//         <Pressable
+//           style={styles.service}
+//           onPress={() => alert('Khám bệnh')}
+//         >
+//           <Text style={styles.serviceIcon}>🩺</Text>
+//           <Text style={styles.serviceText}>Khám bệnh</Text>
+//         </Pressable>
+
+//         <Pressable
+//           style={styles.service}
+//           onPress={() => alert('Spa')}
+//         >
+//           <Text style={styles.serviceIcon}>✂️</Text>
+//           <Text style={styles.serviceText}>Spa</Text>
+//         </Pressable>
+
+//         <Pressable
+//           style={styles.service}
+//           onPress={() => alert('Tiêm phòng')}
+//         >
+//           <Text style={styles.serviceIcon}>💉</Text>
+//           <Text style={styles.serviceText}>Tiêm phòng</Text>
+//         </Pressable>
+
+//       </View>
+
+
+//       {/* DANH SÁCH NỘI DUNG */}
+//       <Text style={styles.sectionTitle}>
+//         Bài viết chăm sóc thú cưng
+//       </Text>
+
+//       <FlatList
+//         data={articles}
+//         scrollEnabled={false}
+//         keyExtractor={(item) => item.id}
+//         renderItem={({ item }) => (
+
+//           <View style={styles.article}>
+
+//             <Image
+//               source={{ uri: item.image }}
+//               style={styles.articleImage}
+//             />
+
+//             <View style={styles.articleContent}>
+//               <Text style={styles.articleTitle}>
+//                 {item.title}
+//               </Text>
+
+//               <Pressable
+//                 style={styles.readButton}
+//                 onPress={() => alert(item.title)}
+//               >
+//                 <Text style={styles.readButtonText}>
+//                   XEM
+//                 </Text>
+//               </Pressable>
+//             </View>
+
+//           </View>
+
+//         )}
+//       />
+
+//     </ScrollView>
+//   );
+// }
+
+
+// const styles = StyleSheet.create({
+
+//   // TOÀN BỘ TRANG
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#F5F7FA',
+//     padding: 20,
+//   },
+
+
+//   // HEADER
+//   header: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
+//     marginBottom: 20,
+//   },
+
+//   appName: {
+//     fontSize: 30,
+//     fontWeight: 'bold',
+//   },
+
+//   headerText: {
+//     fontSize: 20,
+//     marginTop: 4,
+//   },
+
+
+
+
+//   // KHU VỰC THÔNG TIN CHÍNH
+//   mainCard: {
+//     backgroundColor: '#FFFFFF',
+//     borderRadius: 15,
+//     padding: 20,
+//     alignItems: 'center',
+//     marginBottom: 25,
+//   },
+
+//   sectionTitle: {
+//     fontSize: 30,
+//     color: 'blue',
+//     fontWeight: 'bold',
+//     marginBottom: 15,
+//   },
+
+//   petImage: {
+//     width: 180,
+//     height: 180,
+//     borderRadius: 80,
+//     marginBottom: 12,
+   
+//   },
+
+//   petName: {
+//     fontSize: 30,
+//     fontWeight: 'bold',
+//   },
+
+//   petInfo: {
+//     fontSize: 25,
+//     marginTop: 5,
+//   },
+
+
+//   // NÚT
+//   button: {
+//     backgroundColor: '#4CAF50',
+//     paddingVertical: 15,
+//     paddingHorizontal: 35,
+//     borderRadius: 8,
+//     marginTop: 15,
+//   },
+
+//   buttonText: {
+//     color: '#FFFFFF',
+//     fontWeight: 'bold',
+//     fontSize: 18,
+//   },
+
+
+//   // FLEXBOX 
+//   serviceContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     marginBottom: 25,
+//   },
+
+//   service: {
+//     backgroundColor: '#FFFFFF',
+//     width: '31%',
+//     paddingVertical: 18,
+//     alignItems: 'center',
+//     borderRadius: 12,
+//   },
+
+//   serviceIcon: {
+//     fontSize: 35,
+//     marginBottom: 8,
+//   },
+
+//   serviceText: {
+//     fontSize: 25,
+//     fontWeight: '600',
+//   },
+
+
+//   // DANH SÁCH BÀI VIẾT
+//   article: {
+//     flexDirection: 'row',
+//     backgroundColor: '#FFFFFF',
+//     borderRadius: 12,
+//     padding: 10,
+//     marginBottom: 12,
+//   },
+
+//   articleImage: {
+//     width: 90,
+//     height: 90,
+//     borderRadius: 10,
+//   },
+
+//   articleContent: {
+//     flex: 1,
+//     marginLeft: 12,
+//     justifyContent: 'space-between',
+//     paddingVertical: 5,
+//   },
+
+//   articleTitle: {
+//     fontSize: 25,
+//     fontWeight: '600',
+//   },
+
+//   readButton: {
+//     alignSelf: 'flex-start',
+//     backgroundColor: '#4CAF50',
+//     paddingHorizontal: 30,
+//     paddingVertical: 10,
+//     borderRadius: 6,
+//   },
+
+//   readButtonText: {
+//     color: '#FFFFFF',
+//     fontWeight: 'bold',
+//     fontSize: 15,
+//   },
+
+// });
+
+// import React from 'react';
+// import { View, Text, StyleSheet, Image, Pressable, ScrollView } from 'react-native';
+
+// export default function MyApp() {
+//     const score ='10';
+
+//   return(
+//       <view>
+//         {score && <text>Điểm của bạn là: {score}</text>}
+//       </view>
+
+//     );
+// }
+
+// import React from 'react';
+// import { View, Text } from 'react-native';
+
+// export default function MyApp() {
+//   const score = 3;
+//   let xeploai = '';
+
+//   if (score >= 9 ) {
+//     xeploai = 'Xuat sac';
+//   }
+//   else if (score >= 8) {
+//     xeploai = 'Gioi';
+//   }
+//   else if (score >= 7) {
+//     xeploai = 'Kha';
+//   }
+//   else if (score >= 5) {
+//     xeploai = 'Trung binh';
+//   }
+//   else {
+//     xeploai = 'Yeu';
+//   }
+
+//   return (
+//     <View>
+//       {score && <Text>Điểm của bạn là: {score}</Text>}
+//       <Text>Xếp loại: {xeploai}</Text>
+//     </View>
+//   );
+// }
+
+
+import { useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+
+interface Student {
+  name: string;
+  mssv: number;
+  lop?: string;
+  status: "active" | "inactive" | "graduated";
+}
+
+function ThongTinSV(props: Student) {
+  // Trạng thái sinh viên
+  const [status, setStatus] = useState(props.status);
+
+  // Số lần bấm vào card
+  const [count, setCount] = useState(0);
+
+  // Đổi trạng thái
+  const handleStatusChange = () => {
+    if (status === "active") {
+      setStatus("inactive");
+    } else if (status === "inactive") {
+      setStatus("graduated");
+    } else {
+      setStatus("active");
+    }
+  };
+
+  // Đếm số lần bấm card
+  const handleCardPress = () => {
+    setCount(count + 1);
+  };
 
   return (
-    <ScrollView style={styles.container}>
+    <Pressable onPress={handleCardPress}>
+      <View style={styles.card}>
 
-      {/* HEADER */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.appName}>🐾 PET CARE</Text>
-          <Text style={styles.headerText}>
-            Chăm sóc thú cưng của bạn
+      
+        <View style={styles.headerRow}>
+          <Text style={styles.tittle}>
+            Thông tin sinh viên
           </Text>
-        </View>
 
-        
-      </View>
-
-
-      {/* KHU VỰC THÔNG TIN CHÍNH */}
-      <View style={styles.mainCard}>
-
-        <Text style={styles.sectionTitle}>
-          Thú cưng của tôi
-        </Text>
-
-       <Image
-            source={require('../../assets/images/cat.jpg')}
-            style={styles.petImage}
-        
-        />
-        <Text style={styles.petName}>
-           Mun😺
-        </Text>
-
-        <Text style={styles.petInfo}>
-          Laxanh • 2 tuổi
-        </Text>
-
-        {/* NÚT THAO TÁC */}
-        <Pressable
-          style={styles.button}
-          onPress={() => alert('Xem hồ sơ Mun')}
-        >
-          <Text style={styles.buttonText}>
-            XEM HỒ SƠ
-          </Text>
-        </Pressable>
-
-      </View>
-
-
-      {/* DANH SÁCH DỊCH VỤ */}
-      <Text style={styles.sectionTitle}>
-        Dịch vụ chăm sóc
-      </Text>
-
-      <View style={styles.serviceContainer}>
-
-        <Pressable
-          style={styles.service}
-          onPress={() => alert('Khám bệnh')}
-        >
-          <Text style={styles.serviceIcon}>🩺</Text>
-          <Text style={styles.serviceText}>Khám bệnh</Text>
-        </Pressable>
-
-        <Pressable
-          style={styles.service}
-          onPress={() => alert('Spa')}
-        >
-          <Text style={styles.serviceIcon}>✂️</Text>
-          <Text style={styles.serviceText}>Spa</Text>
-        </Pressable>
-
-        <Pressable
-          style={styles.service}
-          onPress={() => alert('Tiêm phòng')}
-        >
-          <Text style={styles.serviceIcon}>💉</Text>
-          <Text style={styles.serviceText}>Tiêm phòng</Text>
-        </Pressable>
-
-      </View>
-
-
-      {/* DANH SÁCH NỘI DUNG */}
-      <Text style={styles.sectionTitle}>
-        Bài viết chăm sóc thú cưng
-      </Text>
-
-      <FlatList
-        data={articles}
-        scrollEnabled={false}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-
-          <View style={styles.article}>
-
-            <Image
-              source={{ uri: item.image }}
-              style={styles.articleImage}
-            />
-
-            <View style={styles.articleContent}>
-              <Text style={styles.articleTitle}>
-                {item.title}
-              </Text>
-
-              <Pressable
-                style={styles.readButton}
-                onPress={() => alert(item.title)}
-              >
-                <Text style={styles.readButtonText}>
-                  XEM
-                </Text>
-              </Pressable>
-            </View>
-
+          {/* Ô đếm số lần bấm */}
+          <View style={styles.countBox}>
+            <Text style={styles.countText}>
+              {count}
+            </Text>
           </View>
 
-        )}
-      />
+          {/* Nút trạng thái */}
+          <Pressable
+            style={styles.statusButton}
+            onPress={handleStatusChange}
+          >
+            <Text style={styles.statText}>
+              {status}
+            </Text>
+          </Pressable>
+        </View>
 
-    </ScrollView>
+        {/* THÔNG TIN SINH VIÊN */}
+        <Text style={styles.infoText}>
+          <Text style={styles.boldText}>
+            Họ và tên:{" "}
+          </Text>
+          {props.name}
+        </Text>
+
+        <Text style={styles.infoText}>
+          <Text style={styles.boldText}>
+            MSSV:{" "}
+          </Text>
+          {props.mssv}
+        </Text>
+
+        {/* Nếu có lớp thì mới hiển thị */}
+        {props.lop && (
+          <Text style={styles.infoText}>
+            <Text style={styles.boldText}>
+              Lớp:{" "}
+            </Text>
+            {props.lop}
+          </Text>
+        )}
+
+      </View>
+    </Pressable>
   );
 }
 
+export default function MyApp() {
+  return (
+    <View style={styles.container}>
+
+      <ThongTinSV
+        name="Nguyễn Văn A"
+        mssv={123456789}
+        lop="CNTT K62"
+        status="graduated"
+      />
+
+      <ThongTinSV
+        name="Trần Thị B"
+        mssv={987654321}
+        lop="CNTT K62"
+        status="inactive"
+      />
+
+      <ThongTinSV
+        name="Lê Văn C"
+        mssv={456789123}
+        lop="CNTT K62"
+        status="active"
+      />
+
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-
-  // TOÀN BỘ TRANG
   container: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
-    padding: 20,
+    backgroundColor: "#f5f5f5",
+    paddingVertical: 20,
+    justifyContent: "center",
   },
 
+  card: {
+    backgroundColor: "#fff",
+    marginHorizontal: 16,
+    marginVertical: 8,
+    padding: 16,
+    borderRadius: 12,
 
-  // HEADER
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
+    elevation: 3,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
 
-  appName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-
-  headerText: {
-    fontSize: 20,
-    marginTop: 4,
-  },
-
-
-
-
-  // KHU VỰC THÔNG TIN CHÍNH
-  mainCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 20,
-    alignItems: 'center',
-    marginBottom: 25,
-  },
-
-  sectionTitle: {
-    fontSize: 30,
-    color: 'blue',
-    fontWeight: 'bold',
-    marginBottom: 15,
-  },
-
-  petImage: {
-    width: 180,
-    height: 180,
-    borderRadius: 80,
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
-   
   },
 
-  petName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-
-  petInfo: {
-    fontSize: 25,
-    marginTop: 5,
-  },
-
-
-  // NÚT
-  button: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
-    borderRadius: 8,
-    marginTop: 15,
-  },
-
-  buttonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+  tittle: {
     fontSize: 18,
-  },
-
-
-  // FLEXBOX 
-  serviceContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 25,
-  },
-
-  service: {
-    backgroundColor: '#FFFFFF',
-    width: '31%',
-    paddingVertical: 18,
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-
-  serviceIcon: {
-    fontSize: 35,
-    marginBottom: 8,
-  },
-
-  serviceText: {
-    fontSize: 25,
-    fontWeight: '600',
-  },
-
-
-  // DANH SÁCH BÀI VIẾT
-  article: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 10,
-    marginBottom: 12,
-  },
-
-  articleImage: {
-    width: 90,
-    height: 90,
-    borderRadius: 10,
-  },
-
-  articleContent: {
+    fontWeight: "bold",
+    color: "#000",
     flex: 1,
-    marginLeft: 12,
-    justifyContent: 'space-between',
-    paddingVertical: 5,
   },
 
-  articleTitle: {
-    fontSize: 25,
-    fontWeight: '600',
-  },
-
-  readButton: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 30,
-    paddingVertical: 10,
+  /* Ô nhỏ hiển thị số lần bấm */
+  countBox: {
+    width: 30,
+    height: 30,
     borderRadius: 6,
+    backgroundColor: "#3197ee",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 8,
   },
 
-  readButtonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+  countText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+
+  /* Nút trạng thái */
+  statusButton: {
+    backgroundColor: "#3197ee",
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 16,
+  },
+
+  statText: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  infoText: {
     fontSize: 15,
+    color: "#333",
+    marginVertical: 3,
   },
 
+  boldText: {
+    fontWeight: "bold",
+    color: "#000",
+  },
 });
+
+
+
+
+
+
+
