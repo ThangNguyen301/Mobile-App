@@ -666,137 +666,258 @@
 // }
 
 
-import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
 
-interface Student {
-  name: string;
-  mssv: number;
-  lop?: string;
-  status: "active" | "inactive" | "graduated";
-}
 
-function ThongTinSV(props: Student) {
-  // Trạng thái sinh viên
-  const [status, setStatus] = useState(props.status);
+import { useState, useCallback } from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
-  // Số lần bấm vào card
-  const [count, setCount] = useState(0);
+import { useFocusEffect } from "expo-router";
 
-  // Đổi trạng thái
-  const handleStatusChange = () => {
-    if (status === "active") {
-      setStatus("inactive");
-    } else if (status === "inactive") {
-      setStatus("graduated");
-    } else {
-      setStatus("active");
+import {
+  getAllMedicines,
+  createMedicine,
+  Medicine,
+} from "../../service/medicine_service";
+
+export default function MedicineListScreen() {
+  const [medicines, setMedicine] = useState<Medicine[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Dữ liệu nhập
+  const [maThuoc, setMaThuoc] = useState("");
+  const [tenThuoc, setTenThuoc] = useState("");
+  const [gia, setGia] = useState("");
+
+  // =========================
+  // GET
+  // =========================
+
+  const loadMedicine = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const data = await getAllMedicines();
+
+      setMedicine(data);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Đã xảy ra lỗi"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadMedicine();
+    }, [loadMedicine])
+  );
+
+  // =========================
+  // POST - THÊM THUỐC
+  // =========================
+
+  const handleAddMedicine = async () => {
+    if (!maThuoc || !tenThuoc || !gia) {
+      setError("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+
+    try {
+      setError(null);
+
+      await createMedicine({
+        maThuoc: maThuoc,
+        tenThuoc: tenThuoc,
+        hoatChatChinh: "Chưa có",
+        hamLuong: "500mg",
+        hangSanXuat: "Nhà sản xuất",
+        hanSuDung: "2028-12-31",
+        gia: Number(gia),
+      });
+
+      // Xóa ô nhập
+      setMaThuoc("");
+      setTenThuoc("");
+      setGia("");
+
+      // Tải lại danh sách
+      await loadMedicine();
+
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Thêm thuốc thất bại"
+      );
     }
   };
 
-  // Đếm số lần bấm card
-  const handleCardPress = () => {
-    setCount(count + 1);
-  };
+  // =========================
+  // LOADING
+  // =========================
 
-  return (
-    <Pressable onPress={handleCardPress}>
-      <View style={styles.card}>
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
 
-      
-        <View style={styles.headerRow}>
-          <Text style={styles.tittle}>
-            Thông tin sinh viên
-          </Text>
-
-          {/* Ô đếm số lần bấm */}
-          <View style={styles.countBox}>
-            <Text style={styles.countText}>
-              {count}
-            </Text>
-          </View>
-
-          {/* Nút trạng thái */}
-          <Pressable
-            style={styles.statusButton}
-            onPress={handleStatusChange}
-          >
-            <Text style={styles.statText}>
-              {status}
-            </Text>
-          </Pressable>
-        </View>
-
-        {/* THÔNG TIN SINH VIÊN */}
-        <Text style={styles.infoText}>
-          <Text style={styles.boldText}>
-            Họ và tên:{" "}
-          </Text>
-          {props.name}
+        <Text>
+          Đang tải dữ liệu...
         </Text>
-
-        <Text style={styles.infoText}>
-          <Text style={styles.boldText}>
-            MSSV:{" "}
-          </Text>
-          {props.mssv}
-        </Text>
-
-        {/* Nếu có lớp thì mới hiển thị */}
-        {props.lop && (
-          <Text style={styles.infoText}>
-            <Text style={styles.boldText}>
-              Lớp:{" "}
-            </Text>
-            {props.lop}
-          </Text>
-        )}
-
       </View>
-    </Pressable>
-  );
-}
+    );
+  }
 
-export default function MyApp() {
   return (
     <View style={styles.container}>
 
-      <ThongTinSV
-        name="Nguyễn Văn A"
-        mssv={123456789}
-        lop="CNTT K62"
-        status="graduated"
+      <Text style={styles.title}>
+        Danh sách thuốc
+      </Text>
+
+      {/* FORM THÊM THUỐC */}
+
+      <TextInput
+        style={styles.input}
+        placeholder="Mã thuốc"
+        value={maThuoc}
+        onChangeText={setMaThuoc}
       />
 
-      <ThongTinSV
-        name="Trần Thị B"
-        mssv={987654321}
-        lop="CNTT K62"
-        status="inactive"
+      <TextInput
+        style={styles.input}
+        placeholder="Tên thuốc"
+        value={tenThuoc}
+        onChangeText={setTenThuoc}
       />
 
-      <ThongTinSV
-        name="Lê Văn C"
-        mssv={456789123}
-        lop="CNTT K62"
-        status="active"
+      <TextInput
+        style={styles.input}
+        placeholder="Giá"
+        value={gia}
+        onChangeText={setGia}
+        keyboardType="numeric"
       />
+
+      <Pressable
+        style={styles.addButton}
+        onPress={handleAddMedicine}
+      >
+        <Text style={styles.buttonText}>
+          + Thêm thuốc
+        </Text>
+      </Pressable>
+
+      {/* HIỂN THỊ LỖI */}
+
+      {error && (
+        <Text style={styles.error}>
+          {error}
+        </Text>
+      )}
+
+      {/* DANH SÁCH THUỐC */}
+
+      {medicines.map((medicine) => (
+        <View
+          key={medicine.id}
+          style={styles.card}
+        >
+          <Text style={styles.titleCard}>
+            {medicine.tenThuoc}
+          </Text>
+
+          <Text style={styles.infoText}>
+            Mã thuốc: {medicine.maThuoc}
+          </Text>
+
+          <Text style={styles.infoText}>
+            Hoạt chất: {medicine.hoatChatChinh}
+          </Text>
+
+          <Text style={styles.infoText}>
+            Hàm lượng: {medicine.hamLuong}
+          </Text>
+
+          <Text style={styles.infoText}>
+            Hãng sản xuất: {medicine.hangSanXuat}
+          </Text>
+
+          <Text style={styles.infoText}>
+            Hạn sử dụng: {medicine.hanSuDung}
+          </Text>
+
+          <Text style={styles.price}>
+            Giá: {medicine.gia}đ
+          </Text>
+        </View>
+      ))}
 
     </View>
   );
 }
 
+// =========================
+// STYLE
+// =========================
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    paddingVertical: 20,
-    justifyContent: "center",
+    padding: 20,
+  },
+
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#000",
+    marginBottom: 15,
+  },
+
+  input: {
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 8,
+  },
+
+  addButton: {
+    backgroundColor: "#3197ee",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  error: {
+    color: "red",
+    marginBottom: 10,
   },
 
   card: {
     backgroundColor: "#fff",
-    marginHorizontal: 16,
     marginVertical: 8,
     padding: 16,
     borderRadius: 12,
@@ -812,49 +933,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
 
-  headerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-
-  tittle: {
+  titleCard: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#000",
-    flex: 1,
-  },
-
-  /* Ô nhỏ hiển thị số lần bấm */
-  countBox: {
-    width: 30,
-    height: 30,
-    borderRadius: 6,
-    backgroundColor: "#3197ee",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 8,
-  },
-
-  countText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-
-  /* Nút trạng thái */
-  statusButton: {
-    backgroundColor: "#3197ee",
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 16,
-  },
-
-  statText: {
-    color: "#fff",
-    fontSize: 13,
-    fontWeight: "600",
+    marginBottom: 8,
   },
 
   infoText: {
@@ -863,15 +946,10 @@ const styles = StyleSheet.create({
     marginVertical: 3,
   },
 
-  boldText: {
+  price: {
+    fontSize: 16,
     fontWeight: "bold",
-    color: "#000",
+    color: "#3197ee",
+    marginTop: 5,
   },
 });
-
-
-
-
-
-
-

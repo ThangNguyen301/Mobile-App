@@ -1,6 +1,6 @@
 
-// lenh chay : node Api.js
-const express = require("express");
+// lenh chay : node APi.js
+const express = require("express"); 
 const cors = require("cors");
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // =========================
-// DỮ LIỆU 5 LOẠI THUỐC
+// DỮ LIỆU 
 // =========================
 
 let medicines = [
@@ -68,7 +68,7 @@ let medicines = [
 ];
 
 // =========================
-// GET - LẤY TẤT CẢ THUỐC
+// GET - all
 // =========================
 
 app.get("/medicines", (req, res) => {
@@ -76,7 +76,7 @@ app.get("/medicines", (req, res) => {
 });
 
 // =========================
-// GET - LẤY 1 THUỐC THEO ID
+// GET - 1
 // =========================
 
 app.get("/medicines/:id", (req, res) => {
@@ -94,7 +94,7 @@ app.get("/medicines/:id", (req, res) => {
 });
 
 // =========================
-// POST - THÊM THUỐC
+// POST - THÊM 
 // =========================
 
 app.post("/medicines", (req, res) => {
@@ -112,7 +112,7 @@ app.post("/medicines", (req, res) => {
     gia: req.body.gia
   };
 
-  medicines.push(newMedicine);
+  medicines.push(newMedicine); // thêm thuốc mới vào mảng medicines
 
   res.status(201).json({
     message: "Thêm thuốc thành công",
@@ -121,13 +121,13 @@ app.post("/medicines", (req, res) => {
 });
 
 // =========================
-// PUT - CẬP NHẬT THUỐC
+// PUT - CẬP NHẬT 
 // =========================
 
 app.put("/medicines/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  const index = medicines.findIndex((item) => item.id === id);
+  const index = medicines.findIndex((item) => item.id === id); // tìm vị trí thuốc 
 
   if (index === -1) {
     return res.status(404).json({
@@ -153,13 +153,13 @@ app.put("/medicines/:id", (req, res) => {
 });
 
 // =========================
-// DELETE - XÓA THUỐC
+// DELETE - XÓA 
 // =========================
 
 app.delete("/medicines/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  const index = medicines.findIndex((item) => item.id === id);
+  const index = medicines.findIndex((item) => item.id === id); // tim vi tri thuoc
 
   if (index === -1) {
     return res.status(404).json({
@@ -175,9 +175,6 @@ app.delete("/medicines/:id", (req, res) => {
   });
 });
 
-// =========================
-// START SERVER
-// =========================
 
 app.listen(PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${PORT}`);

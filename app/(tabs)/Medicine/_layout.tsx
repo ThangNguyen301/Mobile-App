@@ -6,12 +6,12 @@ export default function StudentLayout() {
             <Stack.Screen 
                     name="index"
                     options = {{
-                        title: 'Danh sach sinh vien',   
+                        title: 'Danh sach thuốc',   
                     }} />
                     <Stack.Screen
                     name="detail"
                     options = {{
-                        title: 'Chi tiet sinh vien',   
+                        title: 'Chi tiết thuốc',   
                     }} />
         </Stack>
     );
